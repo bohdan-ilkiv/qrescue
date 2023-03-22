@@ -11,57 +11,64 @@
         android:id="@+id/surface_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#27FFFFFF"
-        android:backgroundTint="#80000000"
+        android:background="#5C000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="225dp"
-        android:layout_height="225dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="139dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="392dp"
-        android:background="#80FFFFFF"
-        android:clickable="false"
-        android:contentDescription="@string/qr_code_frame"
-        android:scaleType="fitCenter"
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="222dp"
+        android:layout_height="231dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="385dp"
         app:layout_constraintBottom_toBottomOf="@+id/surface_view"
         app:layout_constraintEnd_toEndOf="@+id/surface_view"
-        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="@+id/surface_view"
-        app:layout_constraintTop_toTopOf="@+id/surface_view"
+        app:layout_constraintTop_toTopOf="@+id/surface_view" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="151dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="356dp"
+        android:text="@string/textbelowframe"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/surface_view"
+        app:layout_constraintEnd_toEndOf="@+id/surface_view"
+        app:layout_constraintStart_toStartOf="@+id/surface_view"
+        app:layout_constraintTop_toBottomOf="@+id/surfaceView"
         app:layout_constraintVertical_bias="1.0"
-        tools:srcCompat="@android:drawable/screen_background_dark_transparent" />
+        tools:ignore="TextContrastCheck"
+        tools:text="@string/textbelowframe" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/footer"
         android:layout_width="408dp"
         android:layout_height="101dp"
-        android:background="#6D000000"
+        android:background="#12000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="150dp"
-        android:layout_marginBottom="357dp"
-        android:text="@string/textview"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/surface_view"
-        app:layout_constraintEnd_toEndOf="@+id/surface_view"
-        app:layout_constraintStart_toStartOf="@+id/surface_view"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
+        <ImageButton
+            android:id="@+id/flashButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/app_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/flashlight_off" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

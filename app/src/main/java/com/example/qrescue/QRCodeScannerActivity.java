@@ -1,12 +1,17 @@
 package com.example.qrescue;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +33,11 @@ public class QRCodeScannerActivity extends AppCompatActivity {
     private CameraSource cameraSource;
     private SurfaceView surfaceView;
 
+    //Flashlight
+    ImageButton flashButton;
+
+    private boolean isFlashOn = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +51,52 @@ public class QRCodeScannerActivity extends AppCompatActivity {
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA_PERMISSION);
         }
+
+        flashButton = findViewById(R.id.flashButton);
+        flashButton.setOnClickListener(v -> {
+            if (isFlashOn) {
+                turnOffFlash();
+                flashButton.setImageResource(R.drawable.flashlight_off);
+            } else {
+                turnOnFlash();
+                flashButton.setImageResource(R.drawable.flashlight_on);
+            }
+        });
     }
+
+    //Flashlight
+
+
+
+
+
+    private void turnOnFlash() {
+        Log.d("Flash", "Turn on flash");
+        try {
+            CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+            String cameraId = cameraManager.getCameraIdList()[0];
+            cameraManager.setTorchMode(cameraId, true);
+            isFlashOn = true;
+            flashButton.setImageResource(R.drawable.flashlight_on);
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void turnOffFlash() {
+        Log.d("Flash", "Turn off flash");
+        try {
+            CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+            String cameraId = cameraManager.getCameraIdList()[0];
+            cameraManager.setTorchMode(cameraId, false);
+            isFlashOn = false;
+            flashButton.setImageResource(R.drawable.flashlight_off);
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private void startCamera() {
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
@@ -111,7 +166,6 @@ public class QRCodeScannerActivity extends AppCompatActivity {
         super.onDestroy();
         if (cameraSource != null) {
             cameraSource.release();
-
         }
     }
 }
